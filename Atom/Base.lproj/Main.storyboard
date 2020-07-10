@@ -21,17 +21,23 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="uCq-6i-sK0">
                                 <rect key="frame" x="100" y="308.5" width="175" height="50"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NVo-hM-mtl">
+                                <rect key="frame" x="177.5" y="401" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.0037224211934384116" green="0.05528721098705415" blue="0.30795203293035478" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="uCq-6i-sK0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="2bu-mQ-YrZ"/>
                             <constraint firstAttribute="width" secondItem="uCq-6i-sK0" secondAttribute="height" multiplier="15:2" constant="1" id="H65-aF-nwR"/>
+                            <constraint firstItem="NVo-hM-mtl" firstAttribute="top" secondItem="uCq-6i-sK0" secondAttribute="bottom" constant="42.5" id="JIe-AV-q9r"/>
                             <constraint firstItem="uCq-6i-sK0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jwo-7h-c7K"/>
+                            <constraint firstItem="NVo-hM-mtl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="a5g-pe-Y2W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="logoView" destination="uCq-6i-sK0" id="b6H-Qn-Ivq"/>
+                        <outlet property="spinner" destination="NVo-hM-mtl" id="7wi-fI-WKh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
