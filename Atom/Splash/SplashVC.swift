@@ -46,12 +46,7 @@ class SplashVC: UIViewController{
         self.performSegue(withIdentifier: "SplashToNavigationRootSegue", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nav = segue.destination as? UINavigationController{
-            if let moviesVC = nav.viewControllers[0] as? MoviesVC{
-            }
-        }
-    }
+   
 
 }
 
@@ -68,6 +63,7 @@ extension SplashVC: SplashView{
     func setConfiguration(_ url: String) {
         debugPrint("respuesta", url)
         UserDefaults.standard.set(url, forKey: "BASE_URL")
+        onShowMovies()
     }
     
     func showError(){
