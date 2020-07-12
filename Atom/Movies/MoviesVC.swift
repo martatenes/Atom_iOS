@@ -9,9 +9,7 @@
 import UIKit
 
 
-class MoviesVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MoviesView{
-   
-    
+class MoviesVC: UIViewController,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MoviesView{    
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet var collectionView: UICollectionView!
@@ -19,24 +17,38 @@ class MoviesVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     
     var movies : [Movie] = []
     fileprivate let presenter = MoviesPresenter(moviesService: MoviesService())
-    let reuseIdentifier = "MovieCell"
-    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: reuseIdentifier,bundle: nil)
-        self.collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        presenter.attachView(self)
         presenter.getMovies()
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let noOfCellsInRow = 3
+        
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        
+        let totalSpace = flowLayout.sectionInset.left
+            + flowLayout.sectionInset.right
+            + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+        
+        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+        
+        return CGSize(width: size, height: 190)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        //TODO: Navegación a detalle película
     }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView
-            .dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
+            .dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
         cell.setContent(movie: movies[indexPath.row])
         return cell;
     }
@@ -55,6 +67,7 @@ class MoviesVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     
     func stopLoading() {
         spinner.stopAnimating()
+        
     }
     
     func setMovies(movies: [Movie]?) {
@@ -67,6 +80,6 @@ class MoviesVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     func showError() {
-        
+        //TODO: Mostrar Alert con error
     }
 }

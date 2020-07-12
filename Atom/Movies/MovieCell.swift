@@ -14,24 +14,31 @@ class MovieCell: UICollectionViewCell{
     
     @IBOutlet weak var title: UILabel!
 
-    var urlImages = UserDefaults.standard.string(forKey: "BASE_URL")
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     func setContent(movie: Movie){
-        title.text = movie.title
-        if (urlImages != nil){
-            self.thumbnail.imageFromUrl(urlString: urlImages! +  movie.backdrop_path)
+        if let titleMovie = movie.title{
+            title.text = titleMovie
+        }
+        if let imageMovie = movie.backdrop_path{
+       
+            self.thumbnail.imageFromUrl(movieUrl: imageMovie)
         }
         else{
             self.thumbnail.image = UIImage(named: "imgPlaceholder")
+        
         }
     }
 }
 
 extension UIImageView {
-    public func imageFromUrl(urlString: String) {
+    public func imageFromUrl(movieUrl: String) {
+        if let baseUrl = UserDefaults.standard.string(forKey: "BASE_URL") {
+        let urlString = baseUrl + "w780" + movieUrl
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)
             NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {
@@ -40,6 +47,7 @@ extension UIImageView {
                     self.image = UIImage(data: imageData)
                 }
             }
+        }
         }
     }
 }

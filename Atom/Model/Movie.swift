@@ -9,11 +9,11 @@
 import Foundation
 
 
-struct Movie: Codable{
+class Movie: Codable{
     
-    var id: CLong!
-    var title: String!
-    var overview: String!
-    var backdrop_path: String!
+    var id: CLong?
+    var title: String?
+    var overview: String?
+    var backdrop_path: String?
     
 }

@@ -39,9 +39,18 @@ class SplashVC: UIViewController{
     }
     
     func onShowMovies(){
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+       /* let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let moviesVC = storyBoard.instantiateViewController(withIdentifier: "MoviesVC") as! MoviesVC
-        self.present(moviesVC, animated: true, completion: nil)
+        self.present(moviesVC, animated: true, completion: nil)*/
+        
+        self.performSegue(withIdentifier: "SplashToNavigationRootSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nav = segue.destination as? UINavigationController{
+            if let moviesVC = nav.viewControllers[0] as? MoviesVC{
+            }
+        }
     }
 
 }
