@@ -18,9 +18,30 @@ class SplashVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         splashPresenter.attachView(self)
-        splashPresenter.getConfiguration()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
+        if UserDefaults.standard.string(forKey: "BASE_URL") != nil{
+            onShowMovies()
+        }
+        else{
+           splashPresenter.getConfiguration()
+
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        splashPresenter.detachView()
+    }
+    
+    func onShowMovies(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let moviesVC = storyBoard.instantiateViewController(withIdentifier: "MoviesVC") as! MoviesVC
+        self.present(moviesVC, animated: true, completion: nil)
     }
 
 }
@@ -35,7 +56,16 @@ extension SplashVC: SplashView{
         spinner.stopAnimating()
     }
     
-    func setConfiguration(_ configuration: NSDictionary) {
-        debugPrint("respuesta", configuration)
+    func setConfiguration(_ url: String) {
+        debugPrint("respuesta", url)
+        UserDefaults.standard.set(url, forKey: "BASE_URL")
+    }
+    
+    func showError(){
+        let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

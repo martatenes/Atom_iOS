@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+
+struct Movie: Codable{
+    
+    var id: CLong!
+    var title: String!
+    var overview: String!
+    var backdrop_path: String!
+    
+}

@@ -30,13 +30,14 @@ class SplashPresenter{
         self.splashView?.startLoading()
         //TODO: Llamar a getConfiguration en A
         
-        splashService.getConfiguration(onSuccess: { (response: NSDictionary) in
+        splashService.getConfiguration(onSuccess: { (response: String) in
             debugPrint(response)
             self.splashView?.stopLoading()
             self.splashView?.setConfiguration(response)
-        }) { (error: String?) in
+        }) { (error: Error?) in
             debugPrint(error)
             self.splashView?.stopLoading()
+            self.splashView?.showError()
         }
     }
 }

@@ -12,5 +12,6 @@ import Foundation
 protocol SplashView: NSObjectProtocol{
     func startLoading()
     func stopLoading()
-    func setConfiguration(_ configuration: NSDictionary)
+    func setConfiguration(_ url: String)
+    func showError()
 }

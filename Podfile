@@ -7,6 +7,7 @@ target 'Atom' do
 
   # Pods for Atom
 pod 'Alamofire', '~>4.8.2'
+pod 'Alamofire-SwiftyJSON'
 
 target 'AtomTests' do
     inherit! :search_paths
